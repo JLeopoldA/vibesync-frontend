@@ -70,15 +70,11 @@ async function initializeAgent() {
       });
   
       let walletDataStr: string | null = null;
-      
-      let testApiKey = "pQ6GP41istYNuHQ514p5NawOGeFhOtZs";
-      let testApiPrivateKey = "nMHcCAQEEIJqTOpCC06m2Fpggh6ZQLmAkzA5eKAhtUb9nQ84JRIt1oAoGCCqGSM49\nAwEHoUQDQgAEah4bmlnEHdY0zLAgnixQioyGrgw6hFbFlxUgTiiRuBpKo69Og/h0\n5m3TQ7uF4ZUwYTJ8xROECxtAnEWkqxvChg==";
-      let testOpenApiKey = "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";
-
+  
       // Configure CDP Wallet Provider
       const config = {
-        apiKeyName: testApiKey,
-        apiKeyPrivateKey: testApiPrivateKey?.replace(/\\n/g, "\n"),
+        apiKeyName: process.env.CDP_API_KEY_NAME,
+        apiKeyPrivateKey: process.env.CDP_API_KEY_PRIVATE_KEY?.replace(/\\n/g, "\n"),
         cdpWalletData: walletDataStr || undefined,
         networkId: process.env.NETWORK_ID || "base-sepolia",
       };
@@ -98,8 +94,8 @@ async function initializeAgent() {
             apiKeyPrivateKey: process.env.CDP_API_KEY_PRIVATE_KEY?.replace(/\\n/g, "\n"),
           }),
           cdpWalletActionProvider({
-            apiKeyName: testApiKey,
-            apiKeyPrivateKey: testApiPrivateKey?.replace(/\\n/g, "\n"),
+            apiKeyName: process.env.CDP_API_KEY_NAME,
+            apiKeyPrivateKey: process.env.CDP_API_KEY_PRIVATE_KEY?.replace(/\\n/g, "\n"),
           }),
         ],
       });
