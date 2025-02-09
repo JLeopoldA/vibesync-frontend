@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { Wallet, ConnectWallet, ConnectWalletText } from "@coinbase/onchainkit/wallet";
 import { TransactionDefault } from "@coinbase/onchainkit/transaction";
+import PlaylistGenerator from '../../chatbot';
 
 const BASE_SEPOLIA_CHAIN_ID = 84532;
 
@@ -40,6 +41,36 @@ export default function ShowDetailsPage() {
   const [vibeText, setVibeText] = useState("");
   const router = useRouter();
   const { id } = useParams();
+ 
+  function createPlaylist(playlistVibe: string, dj: string) {
+      // let playlist = PlaylistGenerator(playlistVibe, dj);
+      // console.log(playlist);
+      console.log(playlistVibe, dj);
+      // Vibe is Nostalgic
+      let playlist = [
+        ["Avicii", "Levels"],
+        ["Swedish House Mafia", "Don't Worry Child"],
+        ["Martin Garrix", "Animals"],
+        ["Calvin Harris", "Feel So Close"],
+        ["Zedd", "Clarity (ft. Foxes)"],
+        ["David Guetta", "Titanium (ft. Sia)"],
+        ["Hardwell", "Spaceman"],
+        ["DVBBS & Borgeous", "Tsunami"],
+        ["R3HAB", "Samurai (Go Hard)"],
+        ["KSHMR", "Secrets (ft. Vassy)"],
+        ["W&W", "Bigfoot"],
+        ["Nicky Romero", "Toulouse"],
+        ["Alesso", "Heroes (We Could Be)[ft. Tove Lo]"],
+        ["Showtek", "Booyah"],
+        ["Blasterjaxx", "Faith"],
+        ["Tiesto", "Red Lights"],
+        ["Dada Life", "Kick Out the Epic Motherf****r"],
+        ["Axwell /\ Ingrosso", "More Than You Know"],
+        ["Steve Aoki & Chris Lake", "Boneless"],
+        ["DJ KURA", "Rave"]
+      ];
+      console.log(playlist);
+  }
 
   useEffect(() => {
     async function fetchShowDetails() {
@@ -135,12 +166,12 @@ export default function ShowDetailsPage() {
               args: [vibeText, METADATA_URI]
             }]}
             className="mt-6 px-6 py-3 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full text-white text-lg font-medium hover:shadow-lg hover:opacity-90 transition ease-in-out duration-300"
-            onSuccess={() => { setMintSuccess(true); setInputVibe(false); }}
+            onSuccess={() => { setMintSuccess(true); setInputVibe(false); createPlaylist(vibeText, show.djName); }}
           >
             Submit
           </TransactionDefault>
-          <button 
-            onClick={() => { setInputVibe(false); setViewingDetails(true); }}
+          <button
+            onClick={() => { setInputVibe(false); setViewingDetails(true); createPlaylist(vibeText, show.djName)}}
             className="mt-6 px-6 py-3 bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full text-white text-lg font-medium hover:shadow-lg hover:opacity-90 transition ease-in-out duration-300"
           >
             Back to Show Details
